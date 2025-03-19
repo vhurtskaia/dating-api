@@ -24,11 +24,11 @@ interface IUser {
 
 const parseJSONL = (filePath: string): IUser[] => {
     const fileData = fs.readFileSync(filePath, 'utf-8');
-    const lines = fileData.trim().split("\n");
+    const lines = fileData.trim().split('\n');
     return lines.map(line => JSON.parse(line));
 };
 
-const filePath = path.join(process.cwd(), 'public', 'profiles.jsonl');
+const filePath = path.join(process.cwd(), 'src', 'app', 'api', 'users', 'profiles.jsonl');
 const users: IUser[] = parseJSONL(filePath);
 
 export async function GET(req: NextRequest) {
@@ -40,8 +40,8 @@ export async function GET(req: NextRequest) {
     const filteredUsers = users.filter((user) => {
         return (
             (!gender || user.gender === gender) &&
-            (!location || user.location?.toLowerCase().includes(location?.toLowerCase() || '')) &&
-            (!hobby || user.hobbies?.includes(hobby || ''))
+            (!location || user.city?.toLowerCase().includes(location.toLowerCase())) &&
+            (!hobby || user.hobbies?.includes(hobby))
         );
     });
 
