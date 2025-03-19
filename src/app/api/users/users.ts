@@ -27,7 +27,7 @@ interface IQueryParams {
 }
 
 const getUsersData = async (): Promise<IUser[]> => {
-    const res = await fetch('https://your-project.vercel.app/profiles.json');
+    const res = await fetch(`${process.env.VERCEL_URL}/profiles.json`);
     const data = await res.json();
     return data;
 };
